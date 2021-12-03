@@ -34,5 +34,6 @@ while (True):
         os.system("amixer -c 2 -- sset Speaker playback " + volumes[iterator] +"dB")
         # print("amixer -c 1 -- sset Master playback " + volumes[iterator] +"dB")
     elif (selection == "6"):
+        print("killed")
         os.system("sudo killall aplay")
         os.system("sudo killall arecord")
