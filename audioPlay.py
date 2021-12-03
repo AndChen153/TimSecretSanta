@@ -15,7 +15,10 @@ for file in os.listdir("./AudioFiles/"):
 while (True):
     selection = str(input("1 - play random audio clip \n2 - play chug jug \n3 - record audio \n4 - play recorded audio \n5 - cycle volume \n6 - kill song playing \n"))
     if (selection == "1"):
-        os.system("sudo aplay -D hw:2 ./AudioFiles/" + audioFiles[random.randrange(0,len(audioFiles))] + " &")
+        song = audioFiles[random.randrange(0,len(audioFiles))]
+        if (song == "COC.wav"):
+            os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
+        os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
         # print("sudo aplay -D hw:2 ./AudioFiles/" + audioFiles[random.randrange(0,len(audioFiles))])
     elif (selection == "2"):
         os.system("sudo aplay -D hw:2 ChugJug.wav &")
