@@ -41,7 +41,6 @@ for file in os.listdir("./RecordedFiles/"):
 
 all_Audio = audioFiles
 all_Recorded = recordedFiles
-all_Curses = curseWordFiles
 # print(all_Audio, all_Recorded)
 
 while (True):
