@@ -14,7 +14,7 @@ while (True):
     selection = input("1 - play random audio clip \n2 - play chug jug \n3 - record audio \n4 - play recorded audio \n5 - cycle volume \n")
     if (selection == "1"):
         try:
-            os.system("sudo aplay -D hw:0 ./AudioFiles/" + audioFiles[random.randrange(0,len(audioFiles))])
+            os.system("sudo aplay -D hw:0 ./AudioFiles/\"" + audioFiles[random.randrange(0,len(audioFiles))] + "\"")
             # print("sudo aplay -D hw:0 ./AudioFiles/\"" + audioFiles[random.randrange(0,len(audioFiles))] + "\"")
         except:
             print("no audio files in directory")
