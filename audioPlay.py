@@ -1,6 +1,7 @@
 import os
 import random
 from gpiozero import Button
+import time
 
 # playingLED = LED(insert)
 playButton = Button(5)
@@ -100,6 +101,7 @@ while (True):
         #     os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded" + str(recorded_iterator) + ".wav &")
         #     recorded_iterator += 1
         #     # print("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded.wav")
+        time.sleep(0.2)
 
 
 
