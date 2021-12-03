@@ -20,11 +20,12 @@ for file in os.listdir("./RecordedFiles/"):
 
 all_Audio = audioFiles
 all_Recorded = recordedFiles
+print(all_Audio, all_Recorded)
 
 while (True):
-    if len(audioFiles) == 0:
+    if len(audioFiles) < 3:
         audioFiles = all_Audio
-    if len(recordedFiles) == 0:
+    if len(recordedFiles) < 3:
         recordedFiles = all_Recorded
 
     selection = str(input("1 - play random audio clip \n2 - play chug jug \n3 - record audio \n4 - play recorded audio \n5 - cycle volume \n6 - kill song playing \n"))
