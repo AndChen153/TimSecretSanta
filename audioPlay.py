@@ -11,6 +11,11 @@ for file in os.listdir("./AudioFiles/"):
     if file.endswith(".wav"):
         audioFiles.append(file)
 
+recordedFiles = []
+for file in os.listdir("./RecordedFiles/"):
+    if file.endswith(".wav"):
+        audioFiles.append(file)
+
 # print(audioFiles)
 
 while (True):
@@ -29,7 +34,7 @@ while (True):
         recorded_iterator += 1
         # print("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded.wav")
     elif (selection == "4"):
-        os.system("sudo aplay -D hw:2 recorded.wav &")
+        os.system("sudo aplay -D hw:2 recordedFiles[random.randrange(0,len(recordedFiles))] &")
         # print("sudo aplay -D hw:2 recorded.wav")
     elif (selection == "5"):
         if (iterator == 4):
