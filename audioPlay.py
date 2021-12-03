@@ -13,17 +13,11 @@ print(audioFiles)
 while (True):
     selection = input("1 - play random audio clip \n2 - play chug jug \n3 - record audio \n4 - play recorded audio \n5 - cycle volume \n")
     if (selection == "1"):
-        try:
-            os.system("sudo aplay -D hw:2 ./AudioFiles/" + audioFiles[random.randrange(0,len(audioFiles))])
-            # print("sudo aplay -D hw:2 ./AudioFiles/" + audioFiles[random.randrange(0,len(audioFiles))])
-        except:
-            print("no audio files in directory")
+        os.system("sudo aplay -D hw:2 ./AudioFiles/" + audioFiles[random.randrange(0,len(audioFiles))])
+        # print("sudo aplay -D hw:2 ./AudioFiles/" + audioFiles[random.randrange(0,len(audioFiles))])
     elif (selection == "2"):
-        try:
-            os.system("sudo aplay -D hw:2 ./AudioFiles/ChugJug.wav")
-            # print("sudo aplay -D hw:2 ./AudioFiles/ChugJug.wav")
-        except:
-            print("chug jug not in directory")
+        os.system("sudo aplay -D hw:2 ./AudioFiles/ChugJug.wav")
+        # print("sudo aplay -D hw:2 ./AudioFiles/ChugJug.wav")
     elif (selection == "3"):
         os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded.wav")
         # print("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded.wav")
