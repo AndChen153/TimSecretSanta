@@ -10,7 +10,7 @@ for file in os.listdir("./AudioFiles/"):
     if file.endswith(".wav"):
         audioFiles.append(file)
 
-print(audioFiles)
+# print(audioFiles)
 
 while (True):
     selection = str(input("1 - play random audio clip \n2 - play chug jug \n3 - record audio \n4 - play recorded audio \n5 - cycle volume \n6 - kill song playing \n"))
@@ -33,5 +33,6 @@ while (True):
             iterator += 1
         os.system("amixer -c 2 -- sset Speaker playback " + volumes[iterator] +"dB")
         # print("amixer -c 1 -- sset Master playback " + volumes[iterator] +"dB")
-    # elif (selection == "6"):
-    #     os.system("kill ")
+    elif (selection == "6"):
+        os.system("sudo killall aplay")
+        os.system("sudo killall arecord")
