@@ -1,7 +1,8 @@
 import os
 import random
 
-volume = 50
+volumes = ["-114.00", "-25.00", "-12.00", "-1.00", "6.00"]
+iterator = 0
 
 audioFiles = []
 for file in os.listdir("./AudioFiles/"):
@@ -25,9 +26,9 @@ while (True):
         os.system("sudo aplay -D hw:2 recorded.wav")
         # print("sudo aplay -D hw:2 recorded.wav")
     elif (selection == "5"):
-        if (volume == 100):
-            volume = 0
+        if (iterator == 4):
+            iterator = 0
         else:
-            volume += 25
-        os.system("sudo amixer -c 2 set Speaker " + str(volume) + "%")
-        # print("sudo amixer -c 2 set Master " + str(volume) + "%")
+            iterator += 1
+        os.system("amixer -c 2 -- sset Master playback " + volumes[iterator] +"dB")
+        # print("amixer -c 1 -- sset Master playback " + volumes[iterator] +"dB")
