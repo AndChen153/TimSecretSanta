@@ -8,6 +8,8 @@ for file in os.listdir("./AudioFiles/"):
     if file.endswith(".wav"):
         audioFiles.append(file)
 
+print(audioFiles)
+
 while (True):
     selection = input("1 - play random audio clip \n2 - play chug jug \n3 - record audio \n4 - play recorded audio \n5 - cycle volume \n")
     if (selection == "1"):
