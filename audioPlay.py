@@ -14,7 +14,7 @@ for file in os.listdir("./AudioFiles/"):
 recordedFiles = []
 for file in os.listdir("./RecordedFiles/"):
     if file.endswith(".wav"):
-        audioFiles.append(file)
+        recordedFiles.append(file)
 
 # print(audioFiles)
 
