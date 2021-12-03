@@ -30,7 +30,7 @@ while (True):
             iterator = 0
         else:
             iterator += 1
-        os.system("amixer -c 2 -- sset Master playback " + volumes[iterator] +"dB")
+        os.system("amixer -c 2 -- sset Speaker playback " + volumes[iterator] +"dB")
         # print("amixer -c 1 -- sset Master playback " + volumes[iterator] +"dB")
     # elif (selection == "6"):
     #     os.system("kill ")
