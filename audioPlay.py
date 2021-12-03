@@ -62,7 +62,9 @@ while (True):
     if playButton.is_pressed and not running:
         running = True
         if buttonSelected == "cycleAudioButton": # random soundboard
+            print(buttonSelected)
             if toggle2.is_pressed:
+                print("preset")
                 song = audioFiles[random.randrange(0,len(audioFiles))]
                 audioFiles.remove(song)
                 if (song.startswith("COC")):
@@ -72,18 +74,22 @@ while (True):
                     os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
             else:
                 if toggle3.is_pressed:
+                    print("recorded")
                     song = recordedFiles[random.randrange(0,len(recordedFiles))]
                     recordedFiles.remove(song)
                     os.system("sudo aplay -D hw:2 ./RecordedFiles/\"" + song + "\" &")
                     # print("sudo aplay -D hw:2 recorded.wav")
                 else:
+                    print("custom")
                     os.system("sudo aplay -D hw:2 customRecordedAudio.wav &")
         elif buttonSelected == "presetAudioButton": # preset audio, can cycle through two
             if toggle2.is_pressed:
+                print("ChugJug")
                 os.system("sudo aplay -D hw:2 ChugJug.wav &")
             # print("sudo aplay -D hw:2 ChugJug.wav")
 
         elif buttonSelected == "cycleVolumeButton":
+            print("volume cycle")
             if (iterator == 4):
                 iterator = 0
             else:
