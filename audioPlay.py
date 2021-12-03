@@ -25,7 +25,7 @@ while (True):
         os.system("sudo aplay -D hw:2 ChugJug.wav &")
         # print("sudo aplay -D hw:2 ChugJug.wav")
     elif (selection == "3"):
-        os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 ./RecordedFiles/recorded" + str(recorded_iterator) + ".wav &")
+        os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded" + str(recorded_iterator) + ".wav &")
         recorded_iterator += 1
         # print("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded.wav")
     elif (selection == "4"):
