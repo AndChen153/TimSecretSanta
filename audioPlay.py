@@ -18,25 +18,40 @@ for file in os.listdir("./RecordedFiles/"):
 # print(recordedFiles)
 # print(audioFiles)
 
+all_Audio = audioFiles
+all_Recorded = recordedFiles
+
 while (True):
+    if len(audioFiles) == 0:
+        audioFiles = all_Audio
+    if len(recordedFiles) == 0:
+        recordedFiles = all_Recorded
+
     selection = str(input("1 - play random audio clip \n2 - play chug jug \n3 - record audio \n4 - play recorded audio \n5 - cycle volume \n6 - kill song playing \n"))
+
     if (selection == "1"):
         song = audioFiles[random.randrange(0,len(audioFiles))]
+        audioFiles.remove(song)
         if (song.startswith("COC")):
             os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
         os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
         # print("sudo aplay -D hw:2 ./AudioFiles/" + audioFiles[random.randrange(0,len(audioFiles))])
+
     elif (selection == "2"):
         os.system("sudo aplay -D hw:2 ChugJug.wav &")
         # print("sudo aplay -D hw:2 ChugJug.wav")
+
     elif (selection == "3"):
         os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded" + str(recorded_iterator) + ".wav &")
         recorded_iterator += 1
         # print("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded.wav")
+
     elif (selection == "4"):
         song = recordedFiles[random.randrange(0,len(recordedFiles))]
+        recordedFiles.remove(song)
         os.system("sudo aplay -D hw:2 ./RecordedFiles/\"" + song + "\" &")
         # print("sudo aplay -D hw:2 recorded.wav")
+
     elif (selection == "5"):
         if (iterator == 4):
             iterator = 0
@@ -44,6 +59,7 @@ while (True):
             iterator += 1
         os.system("amixer -c 2 -- sset Speaker playback " + volumes[iterator] +"dB &")
         # print("amixer -c 1 -- sset Master playback " + volumes[iterator] +"dB")
+
     elif (selection == "6"):
         print("killed")
         os.system("sudo killall aplay")
