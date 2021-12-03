@@ -1,5 +1,22 @@
 import os
 import random
+from gpiozero import Button
+
+# playingLED = LED(insert)
+playButton = Button(5)
+
+presetAudioButton = Button(6)
+cycleVolumeButton = Button(13)
+cycleAudioButton = Button(19)
+recordAudioButton = Button(26)
+buttonSelected = "presetAudioButton"
+running = False # if any function is running. used to kill audio processes
+
+toggle1 = Button(21) #toggle between recording and playing
+toggle2 = Button(20)
+toggle3 = Button(16)
+
+
 
 volumes = ["-114.00", "-25.00", "-12.00", "-1.00", "6.00"]
 iterator = 0
@@ -15,12 +32,17 @@ recordedFiles = []
 for file in os.listdir("./RecordedFiles/"):
     if file.endswith(".wav"):
         recordedFiles.append(file)
+
+
+
 # print(recordedFiles)
 # print(audioFiles)
 
+
 all_Audio = audioFiles
 all_Recorded = recordedFiles
-print(all_Audio, all_Recorded)
+all_Curses = curseWordFiles
+# print(all_Audio, all_Recorded)
 
 while (True):
     if len(audioFiles) < 3:
@@ -28,40 +50,56 @@ while (True):
     if len(recordedFiles) < 3:
         recordedFiles = all_Recorded
 
-    selection = str(input("1 - play random audio clip \n2 - play chug jug \n3 - record audio \n4 - play recorded audio \n5 - cycle volume \n6 - kill song playing \n"))
+    if presetAudioButton.is_pressed:
+        buttonSelected = "presetAudioButton"
+    elif cycleVolumeButton.is_pressed:
+        buttonSelected = "cycleVolumeButton"
+    elif cycleAudioButton.is_pressed:
+        buttonSelected = "cycleAudioButton"
+    elif recordAudioButton.is_pressed:
+        buttonSelected = "recordAudioButton"
 
-    if (selection == "1"):
-        song = audioFiles[random.randrange(0,len(audioFiles))]
-        audioFiles.remove(song)
-        if (song.startswith("COC")):
-            os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
-        os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
-        # print("sudo aplay -D hw:2 ./AudioFiles/" + audioFiles[random.randrange(0,len(audioFiles))])
+    if playButton.is_pressed and not running:
+        running = True
+        if buttonSelected == "cycleAudioButton": # random soundboard
+            if toggle2.is_pressed:
+                song = audioFiles[random.randrange(0,len(audioFiles))]
+                audioFiles.remove(song)
+                if (song.startswith("COC")):
+                    os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
+                    os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\"")
+                else:
+                    os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
+            else:
+                if toggle3.is_pressed:
+                    song = recordedFiles[random.randrange(0,len(recordedFiles))]
+                    recordedFiles.remove(song)
+                    os.system("sudo aplay -D hw:2 ./RecordedFiles/\"" + song + "\" &")
+                    # print("sudo aplay -D hw:2 recorded.wav")
+                else:
+                    os.system("sudo aplay -D hw:2 customRecordedAudio.wav &")
+        elif buttonSelected == "presetAudioButton": # preset audio, can cycle through two
+            if toggle2.is_pressed:
+                os.system("sudo aplay -D hw:2 ChugJug.wav &")
+            # print("sudo aplay -D hw:2 ChugJug.wav")
 
-    elif (selection == "2"):
-        os.system("sudo aplay -D hw:2 ChugJug.wav &")
-        # print("sudo aplay -D hw:2 ChugJug.wav")
+        elif buttonSelected == "cycleVolumeButton":
+            if (iterator == 4):
+                iterator = 0
+            else:
+                iterator += 1
+            os.system("amixer -c 2 -- sset Speaker playback " + volumes[iterator] +"dB &")
+            # print("amixer -c 1 -- sset Master playback " + volumes[iterator] +"dB")
 
-    elif (selection == "3"):
-        os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded" + str(recorded_iterator) + ".wav &")
-        recorded_iterator += 1
-        # print("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded.wav")
+        # elif (selection == "3"):
+        #     os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded" + str(recorded_iterator) + ".wav &")
+        #     recorded_iterator += 1
+        #     # print("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded.wav")
 
-    elif (selection == "4"):
-        song = recordedFiles[random.randrange(0,len(recordedFiles))]
-        recordedFiles.remove(song)
-        os.system("sudo aplay -D hw:2 ./RecordedFiles/\"" + song + "\" &")
-        # print("sudo aplay -D hw:2 recorded.wav")
 
-    elif (selection == "5"):
-        if (iterator == 4):
-            iterator = 0
-        else:
-            iterator += 1
-        os.system("amixer -c 2 -- sset Speaker playback " + volumes[iterator] +"dB &")
-        # print("amixer -c 1 -- sset Master playback " + volumes[iterator] +"dB")
 
-    elif (selection == "6"):
+    if playButton.is_pressed and running:
+        running = False
         print("killed")
         os.system("sudo killall aplay")
         os.system("sudo killall arecord")
