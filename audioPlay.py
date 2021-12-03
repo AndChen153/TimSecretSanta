@@ -3,6 +3,7 @@ import random
 
 volumes = ["-114.00", "-25.00", "-12.00", "-1.00", "6.00"]
 iterator = 0
+recorded_iterator = 0
 os.system("amixer -c 2 -- sset Speaker playback -5.00dB")
 
 audioFiles = []
@@ -24,7 +25,8 @@ while (True):
         os.system("sudo aplay -D hw:2 ChugJug.wav &")
         # print("sudo aplay -D hw:2 ChugJug.wav")
     elif (selection == "3"):
-        os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded.wav &")
+        os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 ./RecordedFiles/recorded" + recorded_iterator + ".wav &")
+        recorded_iterator += 1
         # print("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 recorded.wav")
     elif (selection == "4"):
         os.system("sudo aplay -D hw:2 recorded.wav &")
