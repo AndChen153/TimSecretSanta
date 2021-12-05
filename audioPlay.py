@@ -43,26 +43,24 @@ def runButton():
     global volumes
     global buttonSelected
 
-    if button.is_pressed and not running:
-        running = True
-        if buttonSelected == "presetAudioButton":
-            os.system("sudo aplay -D hw:2 ChugJug.wav &")
+    if buttonSelected == "presetAudioButton" and button.is_pressed and not running:
+        os.system("sudo aplay -D hw:2 ChugJug.wav &")
 
-        elif buttonSelected == "cycleAudioButton":
-            song = audioFiles[random.randrange(0,len(audioFiles))]
-            audioFiles.remove(song)
-            if (song.startswith("COC")):
-                os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
-            os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
+    elif buttonSelected == "cycleAudioButton" and button.is_pressed and not running:
+        song = audioFiles[random.randrange(0,len(audioFiles))]
+        audioFiles.remove(song)
+        if (song.startswith("COC")):
+            os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
+        os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
 
-        elif buttonSelected == "recordAudioButton":
-            if toggle1.is_pressed:
-                os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 customRecordedAudio.wav &")
-            else:
-                os.system("sudo aplay -D hw:2 customRecordedAudio.wav &")
-        time.sleep(0.4)
+    elif buttonSelected == "recordAudioButton" and button.is_pressed and not running:
+        if toggle1.is_pressed:
+            os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 customRecordedAudio.wav &")
+        else:
+            os.system("sudo aplay -D hw:2 customRecordedAudio.wav &")
+    time.sleep(0.4)
 
-    elif cycleVolumeButton.is_pressed:
+    if cycleVolumeButton.is_pressed:
         if (iterator == 4):
             iterator = 0
         else:
@@ -95,12 +93,16 @@ while True:
 
     if presetAudioButton.is_pressed:
         buttonSelected = "presetAudioButton"
+        print(buttonSelected)
     elif cycleVolumeButton.is_pressed:
         buttonSelected = "cycleVolumeButton"
+        print(buttonSelected)
     elif cycleAudioButton.is_pressed:
         buttonSelected = "cycleAudioButton"
+        print(buttonSelected)
     elif recordAudioButton.is_pressed:
         buttonSelected = "recordAudioButton"
+        print(buttonSelected)
 
     runButton()
 
