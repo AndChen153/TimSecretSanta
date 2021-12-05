@@ -72,7 +72,8 @@ while True:
 
     if button.is_pressed and running:
         running = False
-        if isThisRunning("aplay") or isThisRunning("arecord"):
+        s = subprocess.check_output('top', shell=True)
+        if "aplay" in s or "arecord" in s:
             os.system("sudo killall aplay")
             os.system("sudo killall arecord")
             time.sleep(0.5)
