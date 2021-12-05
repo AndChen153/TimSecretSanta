@@ -32,24 +32,26 @@ def setButton(buttonName):
     buttonSelected = buttonName
     print(buttonSelected)
 
-while (True):
-    if presetAudioButton.is_pressed:
-        setButton("presetAudioButton")
-    elif cycleVolumeButton.is_pressed:
-        setButton("cycleVolumeButton")
-    elif cycleAudioButton.is_pressed:
-        setButton("cycleAudioButton")
-    elif recordAudioButton.is_pressed:
-        setButton("recordAudioButton")
-    print(running)
-    if playButton.is_pressed and not running:
+while True:
+    # if presetAudioButton.is_pressed:
+    #     setButton("presetAudioButton")
+    # elif cycleVolumeButton.is_pressed:
+    #     setButton("cycleVolumeButton")
+    # elif cycleAudioButton.is_pressed:
+    #     setButton("cycleAudioButton")
+    # elif recordAudioButton.is_pressed:
+    #     setButton("recordAudioButton")
+    # print(running)
+
+
+    if not running and playButton.is_pressed :
         # if buttonSelected == "presetAudioButton": # preset audio, can cycle through two
         os.system("sudo aplay -D hw:2 ChugJug.wav &")
         time.sleep(0.5)
 
 
 
-    elif playButton.is_pressed and running:
+    elif running and playButton.is_pressed:
         print("killed")
         os.system("sudo killall aplay")
         os.system("sudo killall arecord")
