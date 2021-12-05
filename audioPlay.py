@@ -83,9 +83,9 @@ while (True):
                     print("custom")
                     os.system("sudo aplay -D hw:2 customRecordedAudio.wav &")
         elif buttonSelected == "presetAudioButton": # preset audio, can cycle through two
-            if toggle2.is_pressed:
-                print("ChugJug")
-                os.system("sudo aplay -D hw:2 ChugJug.wav &")
+            # if toggle2.is_pressed:
+            print("ChugJug")
+            os.system("sudo aplay -D hw:2 ChugJug.wav &")
             # print("sudo aplay -D hw:2 ChugJug.wav")
 
         elif buttonSelected == "cycleVolumeButton":
