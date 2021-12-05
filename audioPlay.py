@@ -45,6 +45,8 @@ while True:
         os.system("amixer -c 2 -- sset Speaker playback " + volumes[iterator] +"dB &")
         # print("amixer -c 1 -- sset Master playback " + volumes[iterator] +"dB")
 
+        time.sleep(0.5)
+
     elif button.is_pressed and running:
         running = False
         print("killed")
