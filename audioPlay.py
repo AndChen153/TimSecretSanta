@@ -43,8 +43,8 @@ while (True):
         setButton("recordAudioButton")
     print(running)
     if playButton.is_pressed and not running:
-        if buttonSelected == "presetAudioButton": # preset audio, can cycle through two
-            os.system("sudo aplay -D hw:2 ChugJug.wav &")
+        # if buttonSelected == "presetAudioButton": # preset audio, can cycle through two
+        os.system("sudo aplay -D hw:2 ChugJug.wav &")
         time.sleep(0.5)
 
 
