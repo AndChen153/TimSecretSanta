@@ -2,16 +2,20 @@ from gpiozero import Button
 import os
 import time
 import random
-import subprocess
-import re
 import psutil
 
 volumes = ["-114.00", "-25.00", "-12.00", "-1.00", "6.00"]
 iterator = 0
-recorded_iterator = 0
 
 button = Button(5)
+presetAudioButton = Button(6)
 cycleVolumeButton = Button(13)
+cycleAudioButton = Button(19)
+recordAudioButton = Button(26)
+buttonSelected = "presetAudioButton"
+toggle1 = Button(21) #toggle between recording and playing
+toggle2 = Button(20)
+toggle3 = Button(16)
 
 running = False
 
@@ -32,17 +36,33 @@ print(all_Audio, all_Recorded)
 def runButton():
     global running
     global iterator
+    global audioFiles
+    global recordedFiles
+    global recorded_iterator
+    global iterator
+    global volumes
+    global buttonSelected
+
     if button.is_pressed and not running:
         running = True
-        song = audioFiles[random.randrange(0,len(audioFiles))]
-        audioFiles.remove(song)
-        if (song.startswith("COC")):
-            os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
-        os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
+        if buttonSelected == "presetAudioButton":
+            os.system("sudo aplay -D hw:2 ChugJug.wav &")
 
-        time.sleep(0.5)
+        elif buttonSelected == "cycleAudioButton":
+            song = audioFiles[random.randrange(0,len(audioFiles))]
+            audioFiles.remove(song)
+            if (song.startswith("COC")):
+                os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
+            os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
 
-    if cycleVolumeButton.is_pressed:
+        elif buttonSelected == "recordAudioButton":
+            if toggle1.is_pressed:
+                os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 customRecordedAudio.wav &")
+            else:
+                os.system("sudo aplay -D hw:2 customRecordedAudio.wav &")
+        time.sleep(0.4)
+
+    elif cycleVolumeButton.is_pressed:
         if (iterator == 4):
             iterator = 0
         else:
@@ -50,22 +70,7 @@ def runButton():
         os.system("amixer -c 2 -- sset Speaker playback " + volumes[iterator] + "dB &")
         # print("amixer -c 1 -- sset Master playback " + volumes[iterator] +"dB")
 
-        time.sleep(0.5)
-
-def findThisProcess( process_name ):
-    ps     = subprocess.Popen("ps -eaf | grep "+process_name, shell=True, stdout=subprocess.PIPE)
-    output = ps.stdout.read()
-    ps.stdout.close()
-    ps.wait()
-    return output
-
-def isThisRunning( process_name ):
-    output = findThisProcess( process_name )
-
-    if re.search('path/of/process'+process_name, output) is None:
-        return False
-    else:
-        return True
+        time.sleep(0.4)
 
 def checkIfProcessRunning(processName):
     '''
@@ -82,6 +87,20 @@ def checkIfProcessRunning(processName):
     return False;
 
 while True:
+
+    if len(audioFiles) < 3:
+        audioFiles = all_Audio
+    if len(recordedFiles) < 3:
+        recordedFiles = all_Recorded
+
+    if presetAudioButton.is_pressed:
+        buttonSelected = "presetAudioButton"
+    elif cycleVolumeButton.is_pressed:
+        buttonSelected = "cycleVolumeButton"
+    elif cycleAudioButton.is_pressed:
+        buttonSelected = "cycleAudioButton"
+    elif recordAudioButton.is_pressed:
+        buttonSelected = "recordAudioButton"
 
     runButton()
 
