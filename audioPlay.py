@@ -3,7 +3,13 @@ import os
 import time
 import random
 
+volumes = ["-114.00", "-25.00", "-12.00", "-1.00", "6.00"]
+iterator = 0
+recorded_iterator = 0
+
 button = Button(5)
+cycleVolumeButton = Button(13)
+
 running = False
 
 audioFiles = []
@@ -30,6 +36,14 @@ while True:
         os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
 
         time.sleep(0.5)
+
+    if cycleVolumeButton.is_pressed:
+        if (iterator == 4):
+            iterator = 0
+        else:
+            iterator += 1
+        os.system("amixer -c 2 -- sset Speaker playback " + volumes[iterator] +"dB &")
+        # print("amixer -c 1 -- sset Master playback " + volumes[iterator] +"dB")
 
     elif button.is_pressed and running:
         running = False
