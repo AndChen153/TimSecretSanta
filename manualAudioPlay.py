@@ -20,10 +20,8 @@ all_Recorded = recordedFiles
 print(all_Audio, all_Recorded)
 
 while (True):
-    if len(audioFiles) == 0:
     if len(audioFiles) < 3:
         audioFiles = all_Audio
-    if len(recordedFiles) == 0:
     if len(recordedFiles) < 3:
         recordedFiles = all_Recorded
 
