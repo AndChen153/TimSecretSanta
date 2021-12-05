@@ -2,6 +2,8 @@ from gpiozero import Button
 import os
 import time
 import random
+import subprocess
+import re
 
 volumes = ["-114.00", "-25.00", "-12.00", "-1.00", "6.00"]
 iterator = 0
@@ -26,7 +28,9 @@ all_Audio = audioFiles
 all_Recorded = recordedFiles
 print(all_Audio, all_Recorded)
 
-while True:
+def runButton():
+    global running
+    global iterator
     if button.is_pressed and not running:
         running = True
         song = audioFiles[random.randrange(0,len(audioFiles))]
@@ -42,14 +46,35 @@ while True:
             iterator = 0
         else:
             iterator += 1
-        os.system("amixer -c 2 -- sset Speaker playback " + volumes[iterator] +"dB &")
+        os.system("amixer -c 2 -- sset Speaker playback " + volumes[iterator] + "dB &")
         # print("amixer -c 1 -- sset Master playback " + volumes[iterator] +"dB")
 
         time.sleep(0.5)
 
-    elif button.is_pressed and running:
+def findThisProcess( process_name ):
+    ps     = subprocess.Popen("ps -eaf | grep "+process_name, shell=True, stdout=subprocess.PIPE)
+    output = ps.stdout.read()
+    ps.stdout.close()
+    ps.wait()
+    return output
+
+def isThisRunning( process_name ):
+    output = findThisProcess( process_name )
+
+    if re.search('path/of/process'+process_name, output) is None:
+        return False
+    else:
+        return True
+
+while True:
+
+    runButton()
+
+    if button.is_pressed and running:
         running = False
-        print("killed")
-        os.system("sudo killall aplay")
-        os.system("sudo killall arecord")
-        time.sleep(0.5)
+        if isThisRunning("aplay") or isThisRunning("arecord"):
+            os.system("sudo killall aplay")
+            os.system("sudo killall arecord")
+            time.sleep(0.5)
+        else:
+            runButton()
