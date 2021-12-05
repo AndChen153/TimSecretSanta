@@ -45,6 +45,7 @@ def runButton():
 
     if buttonSelected == "presetAudioButton" and button.is_pressed and not running:
         os.system("sudo aplay -D hw:2 ChugJug.wav &")
+        running = True
 
     elif buttonSelected == "cycleAudioButton" and button.is_pressed and not running:
         song = audioFiles[random.randrange(0,len(audioFiles))]
@@ -52,12 +53,14 @@ def runButton():
         if (song.startswith("COC")):
             os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
         os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
+        running = True
 
     elif buttonSelected == "recordAudioButton" and button.is_pressed and not running:
         if toggle1.is_pressed:
             os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 customRecordedAudio.wav &")
         else:
             os.system("sudo aplay -D hw:2 customRecordedAudio.wav &")
+        running = True
     time.sleep(0.4)
 
     if cycleVolumeButton.is_pressed:
