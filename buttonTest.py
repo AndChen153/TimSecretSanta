@@ -1,6 +1,6 @@
 from gpiozero import Button
 
-button = Button(4)
+button = Button(5)
 
 while True:
     if button.is_pressed:
