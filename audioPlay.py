@@ -29,6 +29,8 @@ while True:
             os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
         os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
 
+        time.sleep(0.5)
+
     elif button.is_pressed and running:
         running = False
         print("killed")
