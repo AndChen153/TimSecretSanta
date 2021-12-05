@@ -1,9 +1,20 @@
 from gpiozero import Button
 import os
 import time
+import random
 
 button = Button(5)
 running = False
+
+audioFiles = []
+for file in os.listdir("./AudioFiles/"):
+    if file.endswith(".wav"):
+        audioFiles.append(file)
+
+recordedFiles = []
+for file in os.listdir("./RecordedFiles/"):
+    if file.endswith(".wav"):
+        recordedFiles.append(file)
 
 while True:
     if button.is_pressed and not running:
