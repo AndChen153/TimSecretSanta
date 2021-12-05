@@ -78,4 +78,5 @@ while True:
             os.system("sudo killall arecord")
             time.sleep(0.5)
         else:
+            print("else statement")
             runButton()
