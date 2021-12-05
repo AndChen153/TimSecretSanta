@@ -4,6 +4,7 @@ import time
 import random
 import subprocess
 import re
+import psutil
 
 volumes = ["-114.00", "-25.00", "-12.00", "-1.00", "6.00"]
 iterator = 0
@@ -66,14 +67,27 @@ def isThisRunning( process_name ):
     else:
         return True
 
+def checkIfProcessRunning(processName):
+    '''
+    Check if there is any running process that contains the given name processName.
+    '''
+    #Iterate over the all the running process
+    for proc in psutil.process_iter():
+        try:
+            # Check if process name contains the given name string.
+            if processName.lower() in proc.name().lower():
+                return True
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
+    return False;
+
 while True:
 
     runButton()
 
     if button.is_pressed and running:
         running = False
-        s = subprocess.check_output('top', shell=True)
-        if "aplay" in s or "arecord" in s:
+        if checkIfProcessRunning("aplay") or checkIfProcessRunning("arecord"):
             os.system("sudo killall aplay")
             os.system("sudo killall arecord")
             time.sleep(0.5)
