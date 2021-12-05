@@ -48,6 +48,7 @@ while True:
         # if buttonSelected == "presetAudioButton": # preset audio, can cycle through two
         os.system("sudo aplay -D hw:2 ChugJug.wav &")
         time.sleep(0.5)
+        running = False
 
 
 
@@ -56,3 +57,4 @@ while True:
         os.system("sudo killall aplay")
         os.system("sudo killall arecord")
         time.sleep(0.5)
+        running = False
