@@ -110,3 +110,4 @@ while (True):
         print("killed")
         os.system("sudo killall aplay")
         os.system("sudo killall arecord")
+        time.sleep(0.2)
