@@ -16,7 +16,7 @@ running = False # if any function is running. used to kill audio processes
 volumes = ["-114.00", "-25.00", "-12.00", "-1.00", "6.00"]
 iterator = 0
 recorded_iterator = 0
-os.system("amixer -c 2 -- sset Speaker playback -5.00dB")
+# os.system("amixer -c 2 -- sset Speaker playback -5.00dB")
 
 audioFiles = []
 for file in os.listdir("./AudioFiles/"):
