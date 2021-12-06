@@ -57,11 +57,12 @@ while True:
         for file in os.listdir("./RecordedFiles/"):
             if file.endswith(".wav"):
                 recordedFiles.append(file)
-        os.system("sudo arecord -D hw:0 -f S32_LE -r 16000 -c 0 ./RecordedFiles/recorded" + str(len(recordedFiles)) + ".wav &")
+        # os.system("sudo arecord -D hw:0 -f S32_LE -r 16000 -c 0 ./RecordedFiles/recorded" + str(len(recordedFiles)) + ".wav &")
+        os.system("sudo python3 ./recordwav.py ./RecordedFiles/recorded" + str(len(recordedFiles)) + ".wav &")
         recordGo = False
         time.sleep(0.5)
     elif recordButton.is_pressed and not recordGo:
-        os.system("sudo killall arecord")
+        os.system("sudo killall python3")
         time.sleep(0.5)
         recordGo = True
 
