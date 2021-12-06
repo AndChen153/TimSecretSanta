@@ -45,22 +45,26 @@ while True:
         # wavFile = input("Enter a wav filename: ")
         # Play the wav file
         os.system("sudo python3 ./playwav.py ./ChugJug.wav &")
+        print("sudo python3 ./playwav.py ./ChugJug.wav &")
         time.sleep(0.5)
         go = False
     elif selection == 1 and button.is_pressed and go:
         song = audioFiles[random.randrange(0,len(audioFiles))]
         audioFiles.remove(song)
         os.system("sudo python3 ./playwav.py ./AudioFiles/\"" + song + "\" &")
+        print("sudo python3 ./playwav.py ./AudioFiles/\"" + song + "\" &")
         time.sleep(0.5)
         go = False
     elif selection == 2 and button.is_pressed and go:
         song = recordedFiles[random.randrange(0,len(recordedFiles))]
         recordedFiles.remove(song)
         os.system("sudo python3 ./playwav.py ./RecordedFiles/\"" + song + "\" &")
+        print("sudo python3 ./playwav.py ./RecordedFiles/\"" + song + "\" &")
         time.sleep(0.5)
         go = False
     elif button.is_pressed and not go:
         os.system("sudo killall python3")
+        print("sudo killall python3")
         time.sleep(0.5)
         go = True
         # print("Button is not pressed")
