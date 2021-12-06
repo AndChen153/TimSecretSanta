@@ -16,12 +16,7 @@ for file in os.listdir("./AudioFiles/"):
         audioFiles.append(file)
 
 while True:
-    if presetAudioButton.is_pressed:
-        selection = 1
-        time.sleep(0.5)
-    elif cycleAudioButton.is_pressed:
-        selection = 2
-        time.sleep(0.5)
+
 
     if selection == 1 and button.is_pressed and go:
         # wavFile = input("Enter a wav filename: ")
