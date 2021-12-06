@@ -33,7 +33,7 @@ while (True):
         song = audioFiles[random.randrange(0,len(audioFiles))]
         audioFiles.remove(song)
         if (song.startswith("COC")):
-            os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
+            os.system("amixer -c 0 -- sset Speaker playback 6.00dB")
         os.system("sudo aplay -D hw:0 ./AudioFiles/\"" + song + "\" &")
         # print("sudo aplay -D hw:0 ./AudioFiles/" + audioFiles[random.randrange(0,len(audioFiles))])
 
@@ -42,9 +42,9 @@ while (True):
         # print("sudo aplay -D hw:0 ChugJug.wav")
 
     elif (selection == "3"):
-        os.system("sudo arecord -D hw:0 -f S32_LE -r 16000 -c 2 recorded" + str(recorded_iterator) + ".wav &")
+        os.system("sudo arecord -D hw:0 -f S32_LE -r 16000 -c 0 recorded" + str(recorded_iterator) + ".wav &")
         recorded_iterator += 1
-        # print("sudo arecord -D hw:0 -f S32_LE -r 16000 -c 2 recorded.wav")
+        # print("sudo arecord -D hw:0 -f S32_LE -r 16000 -c 0 recorded.wav")
 
     elif (selection == "4"):
         song = recordedFiles[random.randrange(0,len(recordedFiles))]
