@@ -13,6 +13,11 @@ for file in os.listdir("./AudioFiles/"):
     if file.endswith(".wav"):
         audioFiles.append(file)
 
+recordedFiles = []
+for file in os.listdir("./RecordedFiles/"):
+    if file.endswith(".wav"):
+        recordedFiles.append(file)
+
 while True:
 
 
@@ -28,6 +33,10 @@ while True:
         os.system("sudo python3 ./playwav.py ./AudioFiles/\"" + song + "\" &")
         time.sleep(0.5)
         go = False
+    elif selection == 3 and button.is_pressed and go:
+        song = recordedFiles[random.randrange(0,len(recordedFiles))]
+        recordedFiles.remove(song)
+        os.system("sudo python3 ./playwav.py ./RecordedFiles/\"" + song + "\" &")
     elif button.is_pressed and not go:
         os.system("sudo killall python3")
         time.sleep(0.5)
