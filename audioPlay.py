@@ -4,8 +4,14 @@ import random
 import time
 
 button = Button(5)
+cycleVolumeButton = Button(6)
 cycleAudioTypeButton = Button(13)
+
 selection = 0
+iterator = 0
+
+volumes = ["-114.00", "-25.00", "-12.00", "-1.00", "6.00"]
+os.system("amixer -c 2 -- sset Speaker playback -12.00dB")
 
 go = True
 
@@ -26,6 +32,14 @@ while True:
         else:
             selection += 1
         time.sleep(0.5)
+
+    if cycleVolumeButton.is_pressed:
+        if (iterator == 4):
+            iterator = 0
+        else:
+            iterator += 1
+        os.system("amixer -c 0 -- sset Speaker playback " + volumes[iterator] +"dB &")
+        # print("amixer -c 0 -- sset Master playback " + volumes[iterator] +"dB")
 
     if selection == 0 and button.is_pressed and go:
         # wavFile = input("Enter a wav filename: ")
@@ -50,3 +64,5 @@ while True:
         time.sleep(0.5)
         go = True
         # print("Button is not pressed")
+
+
