@@ -11,7 +11,7 @@ selection = 0
 iterator = 0
 
 volumes = ["-114.00", "-25.00", "-12.00", "-1.00", "6.00"]
-os.system("amixer -c 2 -- sset Speaker playback -12.00dB")
+os.system("amixer -c 0 -- sset Speaker playback -12.00dB")
 
 go = True
 
