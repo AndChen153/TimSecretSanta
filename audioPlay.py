@@ -12,7 +12,7 @@ presetAudioButton = Button(6)
 cycleVolumeButton = Button(13)
 cycleAudioButton = Button(19)
 recordAudioButton = Button(26)
-buttonSelected = "presetAudioButton"
+buttonSelected = "cycleAudioButton"
 toggle1 = Button(21) #toggle between recording and playing
 toggle2 = Button(20)
 toggle3 = Button(16)
@@ -99,9 +99,6 @@ while True:
 
     if presetAudioButton.is_pressed:
         buttonSelected = "presetAudioButton"
-        print(buttonSelected)
-    elif cycleVolumeButton.is_pressed:
-        buttonSelected = "cycleVolumeButton"
         print(buttonSelected)
     elif cycleAudioButton.is_pressed:
         buttonSelected = "cycleAudioButton"
