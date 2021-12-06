@@ -10,7 +10,7 @@ while True:
     if button.is_pressed:
         # wavFile = input("Enter a wav filename: ")
         # Play the wav file
-        playsound("ChugJug.wav")
+        os.system("sudo python3 ./playwav.py ./ChugJug.wav &")
         time.sleep(0.5)
     else:
         pass
