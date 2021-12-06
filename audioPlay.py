@@ -4,7 +4,8 @@ import random
 import time
 
 button = Button(5)
-selection = 3
+cycleAudioTypeButton = Button(13)
+selection = 0
 
 go = True
 
@@ -19,21 +20,25 @@ for file in os.listdir("./RecordedFiles/"):
         recordedFiles.append(file)
 
 while True:
+    if cycleAudioTypeButton.is_pressed:
+        if selection == 2:
+            selection = 0
+        else:
+            selection += 1
 
-
-    if selection == 1 and button.is_pressed and go:
+    if selection == 0 and button.is_pressed and go:
         # wavFile = input("Enter a wav filename: ")
         # Play the wav file
         os.system("sudo python3 ./playwav.py ./ChugJug.wav &")
         time.sleep(0.5)
         go = False
-    elif selection == 2 and button.is_pressed and go:
+    elif selection == 1 and button.is_pressed and go:
         song = audioFiles[random.randrange(0,len(audioFiles))]
         audioFiles.remove(song)
         os.system("sudo python3 ./playwav.py ./AudioFiles/\"" + song + "\" &")
         time.sleep(0.5)
         go = False
-    elif selection == 3 and button.is_pressed and go:
+    elif selection == 2 and button.is_pressed and go:
         song = recordedFiles[random.randrange(0,len(recordedFiles))]
         recordedFiles.remove(song)
         os.system("sudo python3 ./playwav.py ./RecordedFiles/\"" + song + "\" &")
