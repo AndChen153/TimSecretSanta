@@ -39,7 +39,7 @@ while True:
         else:
             iterator += 1
         os.system("amixer -c 0 -- sset Speaker playback " + volumes[iterator] +"dB &")
-        # print("amixer -c 0 -- sset Master playback " + volumes[iterator] +"dB")
+        time.sleep(0.5)
 
     if selection == 0 and button.is_pressed and go:
         # wavFile = input("Enter a wav filename: ")
