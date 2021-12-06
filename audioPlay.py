@@ -22,7 +22,7 @@ while True:
         os.system("sudo python3 ./playwav.py ./ChugJug.wav &")
         time.sleep(0.5)
         go = False
-    elif selection == 1 and button.is_pressed and go:
+    elif selection == 2 and button.is_pressed and go:
         song = audioFiles[random.randrange(0,len(audioFiles))]
         audioFiles.remove(song)
         os.system("sudo python3 ./playwav.py ./AudioFiles/\"" + song + "\" &")
