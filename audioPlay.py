@@ -4,7 +4,7 @@ import random
 import time
 
 button = Button(5)
-selection = 2
+selection = 3
 
 go = True
 
