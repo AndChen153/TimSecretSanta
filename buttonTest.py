@@ -8,7 +8,7 @@ button = Button(5)
 
 while True:
     if button.is_pressed:
-        wavFile = input("Enter a wav filename: ")
+        # wavFile = input("Enter a wav filename: ")
         # Play the wav file
         playsound("ChugJug.wav")
         time.sleep(0.5)
