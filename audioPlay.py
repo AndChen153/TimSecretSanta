@@ -38,7 +38,9 @@ def runButton():
     global buttonSelected
 
     if buttonSelected == "presetAudioButton" and button.is_pressed and not running:
-        os.system("sudo aplay -D hw:2 ChugJug.wav &")
+        # os.system("sudo aplay -D hw:2 ChugJug.wav &")
+        os.system("sudo python3 playwav.py ChugJug.wav &")
+        print("playing chugjug")
         running = True
         time.sleep(0.4)
 
@@ -47,13 +49,16 @@ def runButton():
         audioFiles.remove(song)
         if (song.startswith("COC")):
             os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
-        os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
+        # os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
+        os.system("sudo python3 playwav.py ./AudioFiles/\"" + song + "\" &")
+        print("playing " + song)
         running = True
         time.sleep(0.4)
 
     elif buttonSelected == "recordAudioButton" and button.is_pressed and not running:
         # if toggle1.is_pressed:
-        os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 customRecordedAudio.wav &")
+        # os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 customRecordedAudio.wav &")
+        os.system("sudo python3 recordwav.py customRecordedAudio.wav &")
         # else:
         #     os.system("sudo aplay -D hw:2 customRecordedAudio.wav &")
         # running = True
@@ -107,7 +112,7 @@ while True:
         audioFiles.remove(song)
         if (song.startswith("COC")):
             os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
-        os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
+        os.system("sudo python3 playwav.py ./AudioFiles/\"" + song + "\" &")
         running = True
         time.sleep(0.4)
 
