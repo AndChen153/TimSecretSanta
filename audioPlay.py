@@ -1,14 +1,38 @@
 from gpiozero import Button
 import os
+import random
 import time
 
 button = Button(5)
+presetAudioButton = Button(6) # 1
+cycleAudioButton = Button(19) # 2
+selection = 1
+
 go = True
+
+audioFiles = []
+for file in os.listdir("./AudioFiles/"):
+    if file.endswith(".wav"):
+        audioFiles.append(file)
+
 while True:
-    if button.is_pressed and go:
+    if presetAudioButton.is_pressed:
+        selection = 1
+        time.sleep(0.5)
+    elif cycleAudioButton.is_pressed:
+        selection = 2
+        time.sleep(0.5)
+
+    if selection == 1 and button.is_pressed and go:
         # wavFile = input("Enter a wav filename: ")
         # Play the wav file
         os.system("sudo python3 ./playwav.py ./ChugJug.wav &")
+        time.sleep(0.5)
+        go = False
+    elif selection == 2 and button.is_pressed and go:
+        song = audioFiles[random.randrange(0,len(audioFiles))]
+        audioFiles.remove(song)
+        os.system("sudo python3 ./playwav.py ./AudioFiles/\"" + song + "\" &")
         time.sleep(0.5)
         go = False
     elif button.is_pressed and not go:
