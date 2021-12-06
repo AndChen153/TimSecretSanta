@@ -13,9 +13,7 @@ cycleVolumeButton = Button(13)
 cycleAudioButton = Button(19)
 recordAudioButton = Button(26)
 buttonSelected = "cycleAudioButton"
-toggle1 = Button(21) #toggle between recording and playing
-toggle2 = Button(20)
-toggle3 = Button(16)
+
 
 running = False
 
@@ -24,21 +22,17 @@ for file in os.listdir("./AudioFiles/"):
     if file.endswith(".wav"):
         audioFiles.append(file)
 
-recordedFiles = []
-for file in os.listdir("./RecordedFiles/"):
-    if file.endswith(".wav"):
-        recordedFiles.append(file)
 
 all_Audio = audioFiles
-all_Recorded = recordedFiles
-print(all_Audio, all_Recorded)
+# all_Recorded = recordedFiles
+print(all_Audio)
 
 def runButton():
     global running
     global iterator
     global audioFiles
     global recordedFiles
-    global recorded_iterator
+    # global recorded_iterator
     global iterator
     global volumes
     global buttonSelected
@@ -58,12 +52,12 @@ def runButton():
         time.sleep(0.4)
 
     elif buttonSelected == "recordAudioButton" and button.is_pressed and not running:
-        if toggle1.is_pressed:
-            os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 customRecordedAudio.wav &")
-        else:
-            os.system("sudo aplay -D hw:2 customRecordedAudio.wav &")
-        running = True
-        time.sleep(0.4)
+        # if toggle1.is_pressed:
+        os.system("sudo arecord -D hw:2 -f S32_LE -r 16000 -c 2 customRecordedAudio.wav &")
+        # else:
+        #     os.system("sudo aplay -D hw:2 customRecordedAudio.wav &")
+        # running = True
+        # time.sleep(0.4)
 
 
     if cycleVolumeButton.is_pressed:
@@ -94,8 +88,8 @@ while True:
 
     if len(audioFiles) < 3:
         audioFiles = all_Audio
-    if len(recordedFiles) < 3:
-        recordedFiles = all_Recorded
+    # if len(recordedFiles) < 3:
+    #     recordedFiles = all_Recorded
 
     if presetAudioButton.is_pressed:
         buttonSelected = "presetAudioButton"
@@ -117,12 +111,12 @@ while True:
         running = True
         time.sleep(0.4)
 
-    if button.is_pressed and running:
-        running = False
-        if checkIfProcessRunning("aplay") or checkIfProcessRunning("arecord"):
-            os.system("sudo killall aplay")
-            os.system("sudo killall arecord")
-            time.sleep(0.4)
-        else:
-            print("else statement")
-            runButton()
+    # if button.is_pressed and running:
+    #     running = False
+    #     if checkIfProcessRunning("aplay") or checkIfProcessRunning("arecord"):
+    #         os.system("sudo killall aplay")
+    #         os.system("sudo killall arecord")
+    #         time.sleep(0.4)
+    #     else:
+    #         print("else statement")
+    #         runButton()
