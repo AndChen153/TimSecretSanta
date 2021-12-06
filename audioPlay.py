@@ -113,6 +113,7 @@ while True:
         if (song.startswith("COC")):
             os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
         os.system("sudo python3 playwav.py ./AudioFiles/\"" + song + "\" &")
+        print("sudo python3 playwav.py ./AudioFiles/\"" + song + "\" &")
         running = True
         time.sleep(0.4)
 
