@@ -6,6 +6,7 @@ import time
 button = Button(5)
 cycleVolumeButton = Button(6)
 cycleAudioTypeButton = Button(13)
+recordButton = Button(12)
 
 selection = 0
 iterator = 0
@@ -25,9 +26,18 @@ for file in os.listdir("./RecordedFiles/"):
     if file.endswith(".wav"):
         recordedFiles.append(file)
 
+all_Audio = audioFiles
+all_Recorded = recordedFiles
+print(all_Audio, all_Recorded)
+
 while True:
+    if len(audioFiles) < 3:
+        audioFiles = all_Audio
+    if len(recordedFiles) < 3:
+        recordedFiles = all_Recorded
+
     if cycleAudioTypeButton.is_pressed:
-        if selection == 2:
+        if selection > 3:
             selection = 0
         else:
             selection += 1
@@ -60,6 +70,11 @@ while True:
         recordedFiles.remove(song)
         os.system("sudo python3 ./playwav.py ./RecordedFiles/\"" + song + "\" &")
         print("sudo python3 ./playwav.py ./RecordedFiles/\"" + song + "\" &")
+        time.sleep(0.5)
+        go = False
+    elif selection == 3 and button.is_pressed and go:
+        os.system("sudo aplay -D hw:2 customRecordedAudio.wav &")
+        print("sudo aplay -D hw:2 customRecordedAudio.wav &")
         time.sleep(0.5)
         go = False
     elif button.is_pressed and not go:
