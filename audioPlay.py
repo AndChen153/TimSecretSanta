@@ -25,6 +25,7 @@ while True:
             selection = 0
         else:
             selection += 1
+        time.sleep(0.5)
 
     if selection == 0 and button.is_pressed and go:
         # wavFile = input("Enter a wav filename: ")
