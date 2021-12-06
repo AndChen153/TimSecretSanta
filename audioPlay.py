@@ -96,15 +96,15 @@ while True:
     # if len(recordedFiles) < 3:
     #     recordedFiles = all_Recorded
 
-    if presetAudioButton.is_pressed:
-        buttonSelected = "presetAudioButton"
-        print(buttonSelected)
-    elif cycleAudioButton.is_pressed:
-        buttonSelected = "cycleAudioButton"
-        print(buttonSelected)
-    elif recordAudioButton.is_pressed:
-        buttonSelected = "recordAudioButton"
-        print(buttonSelected)
+    # if presetAudioButton.is_pressed:
+    #     buttonSelected = "presetAudioButton"
+    #     print(buttonSelected)
+    # elif cycleAudioButton.is_pressed:
+    #     buttonSelected = "cycleAudioButton"
+    #     print(buttonSelected)
+    # elif recordAudioButton.is_pressed:
+    #     buttonSelected = "recordAudioButton"
+    #     print(buttonSelected)
 
     # runButton()
     if buttonSelected == "cycleAudioButton" and button.is_pressed and not running:
@@ -112,8 +112,8 @@ while True:
         audioFiles.remove(song)
         if (song.startswith("COC")):
             os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
-        os.system("sudo python3 playwav.py ./AudioFiles/\"" + song + "\" &")
-        print("sudo python3 playwav.py ./AudioFiles/\"" + song + "\" &")
+        os.system("sudo python3 ./playwav.py ./AudioFiles/\"" + song + "\" &")
+        print("sudo python3 ./playwav.py ./AudioFiles/\"" + song + "\" &")
         running = True
         time.sleep(0.4)
 
