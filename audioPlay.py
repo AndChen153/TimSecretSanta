@@ -107,7 +107,15 @@ while True:
         buttonSelected = "recordAudioButton"
         print(buttonSelected)
 
-    runButton()
+    # runButton()
+    if buttonSelected == "cycleAudioButton" and button.is_pressed and not running:
+        song = audioFiles[random.randrange(0,len(audioFiles))]
+        audioFiles.remove(song)
+        if (song.startswith("COC")):
+            os.system("amixer -c 2 -- sset Speaker playback 6.00dB")
+        os.system("sudo aplay -D hw:2 ./AudioFiles/\"" + song + "\" &")
+        running = True
+        time.sleep(0.4)
 
     if button.is_pressed and running:
         running = False
