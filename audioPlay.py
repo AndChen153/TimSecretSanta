@@ -13,4 +13,5 @@ while True:
         go = False
     elif button.is_pressed and not go:
         os.system("sudo killall python3")
+        go = True
         # print("Button is not pressed")
