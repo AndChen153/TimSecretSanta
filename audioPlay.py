@@ -62,6 +62,7 @@ while True:
             selection = 0
         else:
             selection += 1
+        print(selection)
         print(buttonNames[selection])
         time.sleep(0.5)
 
