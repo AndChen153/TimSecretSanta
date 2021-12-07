@@ -89,7 +89,7 @@ while True:
         recordGo = False
         time.sleep(0.5)
     elif recordButton.is_pressed and not recordGo:
-        os.system("sudo killall python3")
+        os.system("sudo killall arecord")
         time.sleep(0.5)
         recordGo = True
 
