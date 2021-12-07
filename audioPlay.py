@@ -58,7 +58,7 @@ while True:
 
 
     if cycleAudioTypeButton.is_pressed:
-        if selection > 3:
+        if selection > 2:
             selection = 0
         else:
             selection += 1
