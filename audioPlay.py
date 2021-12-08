@@ -137,13 +137,12 @@ while True:
         time.sleep(0.4)
         go = False
     elif button.is_pressed and not go:
-        os.system("sudo pkill -f playwav.py")
-        with tempfile.TemporaryFile() as tempf:
-            proc = subprocess.Popen(['sudo', 'pkill', '-f','playwav.py'], stdout=tempf)
-            proc.wait()
-            tempf.seek(0)
-            output = tempf.read()
-            print(output)
+        # os.system("sudo pkill -f playwav.py")
+        # ['sudo', 'pkill', '-f','playwav.py']
+        p = subprocess.Popen("sudo pkill -f playwav.py", stdout=subprocess.PIPE, shell=True)
+        (output, err) = p.communicate()
+        p_status = p.wait()
+        print(output)
         if "no" in output:
             go = True
         else:
