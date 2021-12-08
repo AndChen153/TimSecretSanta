@@ -26,19 +26,19 @@ recordGo = True
 
 
 audioFiles = []
-for file in os.listdir("./AudioFiles/"):
+for file in os.listdir("/home/pi/TimSecretSanta/AudioFiles/"):
     if file.endswith(".wav"):
         audioFiles.append(file)
 
 recordedFiles = []
-for file in os.listdir("./RecordedFiles/"):
+for file in os.listdir("/home/pi/TimSecretSanta/RecordedFiles/"):
     if file.endswith(".wav"):
         recordedFiles.append(file)
 recorded_iterator = len(recordedFiles)
 
 
 curseFiles = []
-for file in os.listdir("./CurseFiles/"):
+for file in os.listdir("/home/pi/TimSecretSanta/CurseFiles/"):
     if file.endswith(".wav"):
         curseFiles.append(file)
 
@@ -83,9 +83,9 @@ while True:
 
 
     if recordButton.is_pressed and recordGo:
-        os.system("sudo arecord -D hw:0 -f S32_LE -r 16000 -c 2 ./RecordedFiles/recorded" + str(recorded_iterator) + ".wav &")
+        os.system("sudo arecord -D hw:0 -f S32_LE -r 16000 -c 2 /home/pi/TimSecretSanta/RecordedFiles/recorded" + str(recorded_iterator) + ".wav &")
         recorded_iterator += 1
-        # os.system("sudo python3 ./recordwav.py ./RecordedFiles/recorded" + str(len(recordedFiles)) + ".wav &")
+        # os.system("sudo python3 /home/pi/TimSecretSanta/recordwav.py /home/pi/TimSecretSanta/RecordedFiles/recorded" + str(len(recordedFiles)) + ".wav &")
         recordGo = False
         time.sleep(0.5)
     elif recordButton.is_pressed and not recordGo:
@@ -97,8 +97,8 @@ while True:
     if selection == 0 and button.is_pressed and go:
         # wavFile = input("Enter a wav filename: ")
         # Play the wav file
-        os.system("sudo python3 ./playwav.py ./ChugJug.wav &")
-        print("sudo python3 ./playwav.py ./ChugJug.wav &")
+        os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/ChugJug.wav &")
+        print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/ChugJug.wav &")
         time.sleep(0.5)
         go = False
     elif selection == 1 and button.is_pressed and go:
@@ -106,28 +106,28 @@ while True:
         audioFiles.remove(song)
         if (song.startswith("COC")):
             os.system("amixer -c 0 -- sset Speaker playback 6.00dB")
-        os.system("sudo python3 ./playwav.py ./AudioFiles/\"" + song + "\" &")
-        print("sudo python3 ./playwav.py ./AudioFiles/\"" + song + "\" &")
+        os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/AudioFiles/\"" + song + "\" &")
+        print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/AudioFiles/\"" + song + "\" &")
         os.system("amixer -c 0 -- sset Speaker playback " + volumes[iterator] +"dB &")
         time.sleep(0.5)
         go = False
     elif selection == 2 and button.is_pressed and go:
         song = recordedFiles[random.randrange(0,len(recordedFiles))]
         recordedFiles.remove(song)
-        os.system("sudo python3 ./playwav.py ./RecordedFiles/\"" + song + "\" &")
-        print("sudo python3 ./playwav.py ./RecordedFiles/\"" + song + "\" &")
+        os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/RecordedFiles/\"" + song + "\" &")
+        print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/RecordedFiles/\"" + song + "\" &")
         time.sleep(0.5)
         go = False
     elif selection == 3 and button.is_pressed and go:
-        os.system("sudo aplay -D hw:0 customRecordedAudio.wav &")
-        print("sudo aplay -D hw:0 customRecordedAudio.wav &")
+        os.system("sudo aplay -D hw:0 /home/pi/TimSecretSanta/customRecordedAudio.wav &")
+        print("sudo aplay -D hw:0 /home/pi/TimSecretSanta/customRecordedAudio.wav &")
         time.sleep(0.5)
         go = False
     elif selection == 10 and button.is_pressed and go:
         song = curseFiles[random.randrange(0,len(curseFiles))]
         curseFiles.remove(song)
-        os.system("sudo python3 ./playwav.py ./CurseFiles/\"" + song + "\" &")
-        print("sudo python3 ./playwav.py ./CurseFiles/\"" + song + "\" &")
+        os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/CurseFiles/\"" + song + "\" &")
+        print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/CurseFiles/\"" + song + "\" &")
         time.sleep(0.5)
         go = False
     elif button.is_pressed and not go:
