@@ -107,7 +107,7 @@ while True:
         # wavFile = input("Enter a wav filename: ")
         # Play the wav file
         os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/ChugJug.wav &")
-        print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/ChugJug.wav &")
+        # print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/ChugJug.wav &")
         time.sleep(0.4)
         go = False
     elif selection == 1 and go:
@@ -116,7 +116,7 @@ while True:
         if (song.startswith("COC")):
             os.system("amixer -c 0 -- sset Speaker playback 6.00dB &")
         os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/AudioFiles/\"" + song + "\" &")
-        print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/AudioFiles/\"" + song + "\" &")
+        # print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/AudioFiles/\"" + song + "\" &")
         if (song.startswith("COC")):
             os.system("amixer -c 0 -- sset Speaker playback " + volumes[iterator] +"dB &")
         time.sleep(0.4)
@@ -125,19 +125,19 @@ while True:
         song = recordedFiles[random.randrange(0,len(recordedFiles))]
         recordedFiles.remove(song)
         os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/RecordedFiles/\"" + song + "\" &")
-        print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/RecordedFiles/\"" + song + "\" &")
+        # print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/RecordedFiles/\"" + song + "\" &")
         time.sleep(0.4)
         go = False
     elif selection == 3 and go:
         os.system("sudo aplay -D hw:0 /home/pi/TimSecretSanta/customRecordedAudio.wav &")
-        print("sudo aplay -D hw:0 /home/pi/TimSecretSanta/customRecordedAudio.wav &")
+        # print("sudo aplay -D hw:0 /home/pi/TimSecretSanta/customRecordedAudio.wav &")
         time.sleep(0.4)
         go = False
     elif selection == 10 and go:
         song = curseFiles[random.randrange(0,len(curseFiles))]
         curseFiles.remove(song)
         os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/CurseFiles/\"" + song + "\" &")
-        print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/CurseFiles/\"" + song + "\" &")
+        # print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/CurseFiles/\"" + song + "\" &")
         time.sleep(0.4)
         go = False
     elif button.is_pressed and not go:
