@@ -135,7 +135,7 @@ while True:
         go = False
     elif button.is_pressed and not go:
         # output = subprocess.Popen( ["sudo", "killall", "python3"], stdout=subprocess.PIPE ).communicate()[0]
-        subprocess = subprocess.Popen("sudo killall python3", shell=True, stdout=subprocess.PIPE)
+        subprocess = subprocess.Popen("sudo pkill -f playwav.py", shell=True, stdout=subprocess.PIPE)
         subprocess_return = subprocess.stdout.read()
         print(subprocess_return)
         if "no" in str(subprocess_return):
