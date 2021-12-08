@@ -134,7 +134,7 @@ while True:
         time.sleep(0.4)
         go = False
     elif button.is_pressed and not go:
-        output = subprocess.Popen(["sudo", "killall", "python3"], stdout=subprocess.PIPE ).communicate()[0]
+        output = subprocess.Popen( ["sudo", "killall", "python3"], stdout=subprocess.PIPE ).communicate()[0]
         print(output)
         time.sleep(0.4)
         go = True
