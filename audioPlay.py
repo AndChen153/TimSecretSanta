@@ -95,7 +95,7 @@ while True:
         time.sleep(0.4)
         recordGo = True
 
-    print("run")
+
     if selection == 0 and go:
         # wavFile = input("Enter a wav filename: ")
         # Play the wav file
@@ -135,15 +135,15 @@ while True:
         go = False
     elif button.is_pressed and not go:
         output = subprocess.Popen( ["sudo", "killall", "python3"], stdout=subprocess.PIPE ).communicate()[0]
-        if "no process" in output:
+        if "no" in str(output):
             go = True
         else:
             go = False
             time.sleep(0.4)
         # print("Button is not pressed")
 
-    if button.is_pressed:
-        go = True
-        # time.sleep(0.4)
+    # if button.is_pressed:
+    #     go = True
+    #     # time.sleep(0.4)
 
 
