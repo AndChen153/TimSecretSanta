@@ -2,7 +2,8 @@ from gpiozero import Button
 import os
 import random
 import time
-import subprocess
+from subprocess import run
+
 
 time.sleep(5)
 
@@ -76,14 +77,12 @@ while True:
 
 
     if cycleVolumeButton.is_pressed:
-        os.system("sudo kill $(pgrep -f 'python playwav.py')")
-
-        # if (iterator == 4):
-        #     iterator = 0
-        # else:
-        #     iterator += 1
-        # os.system("amixer -c 0 -- sset Speaker playback " + volumes[iterator] +"dB &")
-        # time.sleep(0.4)
+        if (iterator == 4):
+            iterator = 0
+        else:
+            iterator += 1
+        os.system("amixer -c 0 -- sset Speaker playback " + volumes[iterator] +"dB &")
+        time.sleep(0.4)
 
 
     if recordButton.is_pressed and recordGo:
@@ -97,9 +96,7 @@ while True:
         time.sleep(0.4)
         recordGo = True
 
-    if button.is_pressed:
-        go = True
-        time.sleep(0.4)
+
 
     if selection == 0 and go:
         # wavFile = input("Enter a wav filename: ")
@@ -142,16 +139,21 @@ while True:
         # output = subprocess.Popen( ["sudo", "killall", "python3"], stdout=subprocess.PIPE ).communicate()[0]
         # subprocess = subprocess.Popen("sudo kill $(pgrep -f 'python playwav.py')", shell=True, stdout=subprocess.PIPE)
         # subprocess_return = subprocess.stdout.read()
-        os.system("sudo kill $(pgrep -f 'python playwav.py')")
-        # if "no" in str(subprocess_return):
-        #     go = True
-        #     print(go)
-        # else:
-        #     go = False
-        #     print(go)
-        #     time.sleep(0.4)
+        output = run("sudo pkill -f playwav.py", capture_output=True).stdout]
+        print(output)
+        # os.system("sudo pkill -f playwav.py")
+        if "no" in str(output):
+            go = True
+            print(go)
+        else:
+            go = False
+            print(go)
+            time.sleep(0.4)
         # print("Button is not pressed")
 
+    if button.is_pressed:
+        go = True
+        time.sleep(0.4)
 
 
 
