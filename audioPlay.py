@@ -95,15 +95,17 @@ while True:
         time.sleep(0.4)
         recordGo = True
 
+    if button.is_pressed:
+        go = True
 
-    if selection == 0 and button.is_pressed and go:
+    if selection == 0 and go:
         # wavFile = input("Enter a wav filename: ")
         # Play the wav file
         os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/ChugJug.wav &")
         print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/ChugJug.wav &")
         time.sleep(0.4)
         go = False
-    elif selection == 1 and button.is_pressed and go:
+    elif selection == 1 and go:
         song = audioFiles[random.randrange(0,len(audioFiles))]
         audioFiles.remove(song)
         if (song.startswith("COC")):
@@ -114,19 +116,19 @@ while True:
             os.system("amixer -c 0 -- sset Speaker playback " + volumes[iterator] +"dB &")
         time.sleep(0.4)
         go = False
-    elif selection == 2 and button.is_pressed and go:
+    elif selection == 2 and go:
         song = recordedFiles[random.randrange(0,len(recordedFiles))]
         recordedFiles.remove(song)
         os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/RecordedFiles/\"" + song + "\" &")
         print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/RecordedFiles/\"" + song + "\" &")
         time.sleep(0.4)
         go = False
-    elif selection == 3 and button.is_pressed and go:
+    elif selection == 3 and go:
         os.system("sudo aplay -D hw:0 /home/pi/TimSecretSanta/customRecordedAudio.wav &")
         print("sudo aplay -D hw:0 /home/pi/TimSecretSanta/customRecordedAudio.wav &")
         time.sleep(0.4)
         go = False
-    elif selection == 10 and button.is_pressed and go:
+    elif selection == 10 and go:
         song = curseFiles[random.randrange(0,len(curseFiles))]
         curseFiles.remove(song)
         os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/CurseFiles/\"" + song + "\" &")
@@ -135,9 +137,11 @@ while True:
         go = False
     elif button.is_pressed and not go:
         output = subprocess.Popen( ["sudo", "killall", "python3"], stdout=subprocess.PIPE ).communicate()[0]
-        print(output)
+        if "no process" in output:
+            go = True
+        else:
+            go = False
         time.sleep(0.4)
-        go = True
         # print("Button is not pressed")
 
 
