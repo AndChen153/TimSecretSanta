@@ -137,8 +137,10 @@ while True:
         output = subprocess.Popen( ["sudo", "killall", "python3"], stdout=subprocess.PIPE ).communicate()[0]
         if "no" in str(output):
             go = True
+            print(go)
         else:
             go = False
+            print(go)
             time.sleep(0.4)
         # print("Button is not pressed")
 
