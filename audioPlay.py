@@ -139,7 +139,7 @@ while True:
         # output = subprocess.Popen( ["sudo", "killall", "python3"], stdout=subprocess.PIPE ).communicate()[0]
         # subprocess = subprocess.Popen("sudo kill $(pgrep -f 'python playwav.py')", shell=True, stdout=subprocess.PIPE)
         # subprocess_return = subprocess.stdout.read()
-        output = run("sudo pkill -f playwav.py", capture_output=True).stdout]
+        output = run("sudo pkill -f playwav.py", capture_output=True).stdout
         print(output)
         # os.system("sudo pkill -f playwav.py")
         if "no" in str(output):
