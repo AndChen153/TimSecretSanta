@@ -2,7 +2,8 @@ from gpiozero import Button
 import os
 import random
 import time
-from subprocess import run
+import subprocess
+import tempfile
 
 
 time.sleep(5)
@@ -136,18 +137,17 @@ while True:
         time.sleep(0.4)
         go = False
     elif button.is_pressed and not go:
-        # output = subprocess.Popen( ["sudo", "killall", "python3"], stdout=subprocess.PIPE ).communicate()[0]
-        # subprocess = subprocess.Popen("sudo kill $(pgrep -f 'python playwav.py')", shell=True, stdout=subprocess.PIPE)
-        # subprocess_return = subprocess.stdout.read()
-        try:
-            output = run("sudo pkill -f playwav.py", capture_output=True).stdout
-            print(output)
-            # os.system("sudo pkill -f playwav.py")
-            go = False
-            time.sleep(0.4)
-        except:
+        os.system("sudo pkill -f playwav.py")
+        with tempfile.TemporaryFile() as tempf:
+            proc = subprocess.Popen(['sudo', 'pkill', '-f','playwav.py'], stdout=tempf)
+            proc.wait()
+            tempf.seek(0)
+            output = tempf.read()
+
+        if "no" in output:
             go = True
-            time.sleep(0.4)
+        else:
+            go = False
 
     # if button.is_pressed:
     #     go = True
