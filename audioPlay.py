@@ -2,6 +2,7 @@ from gpiozero import Button
 import os
 import random
 import time
+from subprocess import run
 
 time.sleep(5)
 
@@ -109,7 +110,8 @@ while True:
             os.system("amixer -c 0 -- sset Speaker playback 6.00dB &")
         os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/AudioFiles/\"" + song + "\" &")
         print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/AudioFiles/\"" + song + "\" &")
-        os.system("amixer -c 0 -- sset Speaker playback " + volumes[iterator] +"dB &")
+        if (song.startswith("COC")):
+            os.system("amixer -c 0 -- sset Speaker playback " + volumes[iterator] +"dB &")
         time.sleep(0.4)
         go = False
     elif selection == 2 and button.is_pressed and go:
@@ -132,8 +134,8 @@ while True:
         time.sleep(0.4)
         go = False
     elif button.is_pressed and not go:
-        os.system("sudo killall python3")
-        print("sudo killall python3")
+        output = run("sudo killall python3", capture_output=True).stdout
+        print(output)
         time.sleep(0.4)
         go = True
         # print("Button is not pressed")
