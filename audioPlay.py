@@ -106,7 +106,7 @@ while True:
         song = audioFiles[random.randrange(0,len(audioFiles))]
         audioFiles.remove(song)
         if (song.startswith("COC")):
-            os.system("amixer -c 0 -- sset Speaker playback 6.00dB")
+            os.system("amixer -c 0 -- sset Speaker playback 6.00dB &")
         os.system("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/AudioFiles/\"" + song + "\" &")
         print("sudo python3 /home/pi/TimSecretSanta/playwav.py /home/pi/TimSecretSanta/AudioFiles/\"" + song + "\" &")
         os.system("amixer -c 0 -- sset Speaker playback " + volumes[iterator] +"dB &")
