@@ -3,6 +3,7 @@ import os
 import random
 import time
 
+time.sleep(5)
 
 button = Button(5)
 
