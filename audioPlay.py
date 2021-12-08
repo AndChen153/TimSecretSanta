@@ -2,7 +2,7 @@ from gpiozero import Button
 import os
 import random
 import time
-from subprocess import run
+import subprocess
 
 time.sleep(5)
 
@@ -134,7 +134,7 @@ while True:
         time.sleep(0.4)
         go = False
     elif button.is_pressed and not go:
-        output = os.popen('sudo killall python3').readlines()
+        output = subprocess.Popen("sudo killall python3", stdout=subprocess.PIPE ).communicate()[0]
         print(output)
         time.sleep(0.4)
         go = True
