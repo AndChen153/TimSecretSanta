@@ -141,6 +141,7 @@ while True:
         # subprocess_return = subprocess.stdout.read()
         try:
             output = run("sudo pkill -f playwav.py", capture_output=True).stdout
+            print(output)
             # os.system("sudo pkill -f playwav.py")
             go = False
             time.sleep(0.4)
