@@ -143,7 +143,7 @@ while True:
             proc.wait()
             tempf.seek(0)
             output = tempf.read()
-
+            print(output)
         if "no" in output:
             go = True
         else:
