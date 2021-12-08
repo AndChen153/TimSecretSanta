@@ -53,6 +53,7 @@ all_Curse = curseFiles
 
 
 while True:
+    print(len(curseFiles))
     if len(audioFiles) < 3:
         audioFiles = all_Audio
     if len(recordedFiles) < 3:
