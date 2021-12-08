@@ -139,21 +139,18 @@ while True:
         # output = subprocess.Popen( ["sudo", "killall", "python3"], stdout=subprocess.PIPE ).communicate()[0]
         # subprocess = subprocess.Popen("sudo kill $(pgrep -f 'python playwav.py')", shell=True, stdout=subprocess.PIPE)
         # subprocess_return = subprocess.stdout.read()
-        output = run("sudo pkill -f playwav.py", capture_output=True).stdout
-        print(output)
-        # os.system("sudo pkill -f playwav.py")
-        if "no" in str(output):
-            go = True
-            print(go)
-        else:
+        try:
+            output = run("sudo pkill -f playwav.py", capture_output=True).stdout
+            # os.system("sudo pkill -f playwav.py")
             go = False
-            print(go)
             time.sleep(0.4)
-        # print("Button is not pressed")
+        except:
+            go = True
+            time.sleep(0.4)
 
-    if button.is_pressed:
-        go = True
-        time.sleep(0.4)
+    # if button.is_pressed:
+    #     go = True
+    #     time.sleep(0.4)
 
 
 
