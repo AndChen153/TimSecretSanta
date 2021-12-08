@@ -139,7 +139,7 @@ while True:
     elif button.is_pressed and not go:
         # os.system("sudo pkill -f playwav.py")
         # ['sudo', 'pkill', '-f','playwav.py']
-        p = subprocess.Popen("sudo pkill -f playwav.py", stdout=subprocess.PIPE, shell=True)
+        p = subprocess.Popen("pgrep -af python", stdout=subprocess.PIPE, shell=True)
         (output, err) = p.communicate()
         p_status = p.wait()
         print(output)
