@@ -134,7 +134,7 @@ while True:
         time.sleep(0.4)
         go = False
     elif button.is_pressed and not go:
-        output = run("sudo killall python3", capture_output=True).stdout
+        output = os.popen('sudo killall python3').readlines()
         print(output)
         time.sleep(0.4)
         go = True
