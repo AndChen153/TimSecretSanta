@@ -139,7 +139,7 @@ while True:
             go = True
         else:
             go = False
-        time.sleep(0.4)
+        # time.sleep(0.4)
         # print("Button is not pressed")
 
     if button.is_pressed:
