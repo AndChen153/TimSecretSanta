@@ -30,30 +30,33 @@ recordGo = True
 
 
 audioFiles = []
+all_Audio = []
 for file in os.listdir("/home/pi/TimSecretSanta/AudioFiles/"):
     if file.endswith(".wav"):
         audioFiles.append(file)
+        all_Audio.append(file)
 
 recordedFiles = []
+all_Recorded = []
 for file in os.listdir("/home/pi/TimSecretSanta/RecordedFiles/"):
     if file.endswith(".wav"):
         recordedFiles.append(file)
+        all_Recorded.append(file)
 recorded_iterator = len(recordedFiles)
 
 
 curseFiles = []
+all_Curse = []
 for file in os.listdir("/home/pi/TimSecretSanta/CurseFiles/"):
     if file.endswith(".wav"):
         curseFiles.append(file)
+        all_Curse.append(file)
 
-all_Audio = audioFiles
-all_Recorded = recordedFiles
-all_Curse = curseFiles
 # print(all_Audio, all_Recorded)
 
 
 while True:
-    print(len(curseFiles))
+    print(len(curseFiles), len(all_Curse))
     if len(audioFiles) < 3:
         audioFiles = all_Audio
     if len(recordedFiles) < 3:
