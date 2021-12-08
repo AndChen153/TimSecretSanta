@@ -95,7 +95,7 @@ while True:
         time.sleep(0.4)
         recordGo = True
 
-
+    print("run")
     if selection == 0 and go:
         # wavFile = input("Enter a wav filename: ")
         # Play the wav file
