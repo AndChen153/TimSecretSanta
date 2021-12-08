@@ -95,8 +95,6 @@ while True:
         time.sleep(0.4)
         recordGo = True
 
-    if button.is_pressed:
-        go = True
 
     if selection == 0 and go:
         # wavFile = input("Enter a wav filename: ")
@@ -143,5 +141,9 @@ while True:
             go = False
         time.sleep(0.4)
         # print("Button is not pressed")
+
+    if button.is_pressed:
+        go = True
+        # time.sleep(0.4)
 
 
