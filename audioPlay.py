@@ -56,7 +56,7 @@ for file in os.listdir("/home/pi/TimSecretSanta/CurseFiles/"):
 
 
 while True:
-    print(len(curseFiles), len(all_Curse))
+    # print(len(curseFiles), len(all_Curse))
     if len(audioFiles) < 3:
         audioFiles = all_Audio
     if len(recordedFiles) < 3:
