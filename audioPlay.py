@@ -91,12 +91,14 @@ while True:
 
 
     if recordButton.is_pressed and recordGo:
-        os.system("sudo arecord -D hw:0 -f S32_LE -r 16000 -c 2 /home/pi/TimSecretSanta/customRecordedAudio.wav &")
+        os.system("sudo arecord -D hw:0 -f S24_LE -r 16000 -c 2 /home/pi/TimSecretSanta/customRecordedAudio.wav &")
         recorded_iterator += 1
         # os.system("sudo python3 /home/pi/TimSecretSanta/recordwav.py /home/pi/TimSecretSanta/RecordedFiles/recorded" + str(len(recordedFiles)) + ".wav &")
         recordGo = False
+        print("recording")
         time.sleep(0.4)
     elif recordButton.is_pressed and not recordGo:
+        print("killrecord")
         os.system("sudo killall arecord")
         time.sleep(0.4)
         recordGo = True
