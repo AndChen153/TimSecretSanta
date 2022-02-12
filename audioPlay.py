@@ -143,6 +143,7 @@ while True:
         time.sleep(0.4)
         go = False
     elif button.is_pressed and not go:
+        print(selection)
         # os.system("sudo pkill -f playwav.py")
         # ['sudo', 'pkill', '-f','playwav.py']
         p = subprocess.Popen("pgrep -af python", stdout=subprocess.PIPE, shell=True)
@@ -150,8 +151,11 @@ while True:
         output = str(output, 'UTF-8')
         if "playwav" in output:
             os.system("sudo pkill -f playwav.py")
+            print("kill")
         else:
             go = True
+            print("GO")
+
 
     # if button.is_pressed:
     #     go = True
